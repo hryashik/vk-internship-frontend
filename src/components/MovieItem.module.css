@@ -1,0 +1,21 @@
+.card {
+   position: relative;
+   max-width: 345px;
+   width: 100%;
+   transition: .3s;
+}
+
+.card:hover {
+   transition: .3s;
+   transform: scale(1.06);
+   box-shadow: 1px 1px 10px rgba(112, 112, 112, 0.744);
+}
+
+.rating {
+   position: absolute;
+   bottom: 65px;
+   font-family: "Roboto";
+   right: 5px;
+   color: red;
+   text-decoration: underline;
+}

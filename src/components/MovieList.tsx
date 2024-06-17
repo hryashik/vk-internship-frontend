@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import { MovieType } from "../types/movieType";
 import MovieItem from "./MovieItem";
 
@@ -14,11 +15,13 @@ const MovieList: React.FC<IProps> = ({ movies }) => {
       );
    }
    return (
-      <div>
+      <Grid container spacing={2}>
          {movies.map((movie, idx) => (
-            <MovieItem {...movie} key={idx} />
+            <Grid item sm={6} lg={3} xl={2}>
+               <MovieItem {...movie} key={idx} />
+            </Grid>
          ))}
-      </div>
+      </Grid>
    );
 };
 

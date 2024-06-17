@@ -9,12 +9,14 @@ interface IProps {
 const StarRating: React.FC<IProps> = ({ value }) => {
    return (
       <Rating
+         onMouseEnter={undefined}
          max={10}
          name="customized-icons"
          value={value}
          precision={0.5}
          emptyIcon={<StarBorderIcon fontSize="inherit" />}
          icon={<StarIcon fontSize="inherit" />}
+         readOnly={true}
       />
    );
 };

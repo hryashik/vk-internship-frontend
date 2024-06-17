@@ -9,6 +9,22 @@ const movies: MovieType[] = [
    { rating: 9, title: "Title", year: 2005 },
    { rating: 9, title: "Title", year: 2005 },
    { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
+   { rating: 9, title: "Title", year: 2005 },
 ];
 
 export const fetchMovies = async () => {
