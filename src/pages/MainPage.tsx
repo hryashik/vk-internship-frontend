@@ -3,6 +3,17 @@ import { MovieType } from "../types/movieType";
 import { fetchMovies } from "../api/movieApi";
 import MovieList from "../components/MovieList";
 import FilterGenreComponent from "../components/FilterComponent/FilterComponent";
+import SortComponent from "../components/SortComponent/SortComponent";
+
+const genreNames = [
+   "Комедия",
+   "Драма",
+   "Триллер",
+   "Боевик",
+   "Ужасы",
+   "Детектив",
+   "Криминал",
+];
 
 const MainPage = () => {
    const [movies, setMovies] = useState<MovieType[]>([]);
@@ -43,9 +54,11 @@ const MainPage = () => {
       <div>
          <div>
             <FilterGenreComponent
+               names={genreNames}
                genres={genres}
                clickOnGenre={memoizedSetGenre}
             />
+            <SortComponent />
          </div>
          <MovieList movies={movies} />
       </div>

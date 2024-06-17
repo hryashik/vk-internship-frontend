@@ -9,6 +9,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 
 interface IProps {
+   names: string[];
    genres: string[];
    clickOnGenre: (value: string[]) => void;
 }
@@ -24,16 +25,6 @@ const MenuProps = {
    },
 };
 
-const names = [
-   "Комедия",
-   "Драма",
-   "Триллер",
-   "Боевик",
-   "Ужасы",
-   "Детектив",
-   "Криминал",
-];
-
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
    return {
       fontWeight:
@@ -43,7 +34,11 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
    };
 }
 
-const FilterGenreComponent: React.FC<IProps> = ({ genres, clickOnGenre }) => {
+const FilterGenreComponent: React.FC<IProps> = ({
+   genres,
+   clickOnGenre,
+   names,
+}) => {
    const theme = useTheme();
    const handleChange = (event: SelectChangeEvent<typeof genres>) => {
       const {
