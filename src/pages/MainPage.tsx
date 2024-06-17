@@ -5,6 +5,7 @@ import MovieList from "../components/MovieList";
 import FilterGenreComponent from "../components/FilterComponent/FilterComponent";
 import SortComponent from "../components/SortComponent/SortComponent";
 import { SortEnumType } from "../types/sortType";
+import YearSlider from "../components/YearSlider/YearSlider";
 
 const genreNames = [
    "Комедия",
@@ -19,6 +20,10 @@ const genreNames = [
 const MainPage = () => {
    const [movies, setMovies] = useState<MovieType[]>([]);
    const [error, setError] = useState<boolean>(false);
+   const [sortType, setSortType] = useState<SortEnumType>(
+      SortEnumType.RatingDesc
+   );
+   const [yearRange, setYearRange] = useState<number[]>([1990, 2024]);
    const [genres, setGenre] = useState<string[]>([
       "Комедия",
       "Драма",
@@ -28,9 +33,6 @@ const MainPage = () => {
       "Детектив",
       "Криминал",
    ]);
-   const [sortType, setSortType] = useState<SortEnumType>(
-      SortEnumType.RatingDesc
-   );
 
    const memoizedSetGenre = useCallback((value: string[]) => {
       setGenre([...value]);
@@ -38,6 +40,10 @@ const MainPage = () => {
 
    const memoizedSetSortType = useCallback((value: SortEnumType) => {
       setSortType(value);
+   }, []);
+
+   const memoizedSetYearRange = useCallback((value: number[]) => {
+      setYearRange(value);
    }, []);
 
    //const [page, setPage] = useState<number>(1);
@@ -59,9 +65,16 @@ const MainPage = () => {
          </>
       );
    }
+
    return (
       <div>
-         <div style={{ display: "flex", alignItems: "start" }}>
+         <div
+            style={{
+               display: "flex",
+               alignItems: "center",
+               justifyContent: "space-between",
+            }}
+         >
             <FilterGenreComponent
                names={genreNames}
                genres={genres}
@@ -71,6 +84,7 @@ const MainPage = () => {
                sortType={sortType}
                setSortType={memoizedSetSortType}
             />
+            <YearSlider value={yearRange} setValue={memoizedSetYearRange} />
          </div>
          <MovieList movies={movies} />
       </div>

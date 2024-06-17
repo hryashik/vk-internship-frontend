@@ -6,10 +6,11 @@ import { Box, CardActionArea } from "@mui/material";
 import styles from "./MovieItem.module.css";
 
 import { MovieType } from "../types/movieType";
+import React from "react";
 
 interface IProps extends MovieType {}
 
-const MovieItem: React.FC<IProps> = (movie) => {
+const MovieItem: React.FC<IProps> = React.memo((movie) => {
    const calcColor = (rating: number) => {
       if (rating <= 5) return "red";
       else if (rating > 5 && rating < 7.5) return "yellow";
@@ -48,6 +49,6 @@ const MovieItem: React.FC<IProps> = (movie) => {
          </CardActionArea>
       </Card>
    );
-};
+});
 
 export default MovieItem;
