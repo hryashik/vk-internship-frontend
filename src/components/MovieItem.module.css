@@ -5,11 +5,18 @@
    transition: .3s;
 }
 
+.card img {
+   height: 250px;
+   object-fit: cover;
+}
+
 .card:hover {
    transition: .3s;
    transform: scale(1.06);
    box-shadow: 1px 1px 10px rgba(112, 112, 112, 0.744);
 }
+
+.card__content {}
 
 .rating {
    position: absolute;
