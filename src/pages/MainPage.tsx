@@ -4,6 +4,7 @@ import { fetchMovies } from "../api/movieApi";
 import MovieList from "../components/MovieList";
 import FilterGenreComponent from "../components/FilterComponent/FilterComponent";
 import SortComponent from "../components/SortComponent/SortComponent";
+import { SortEnumType } from "../types/sortType";
 
 const genreNames = [
    "Комедия",
@@ -27,10 +28,18 @@ const MainPage = () => {
       "Детектив",
       "Криминал",
    ]);
+   const [sortType, setSortType] = useState<SortEnumType>(
+      SortEnumType.RatingDesc
+   );
 
    const memoizedSetGenre = useCallback((value: string[]) => {
       setGenre([...value]);
    }, []);
+
+   const memoizedSetSortType = useCallback((value: SortEnumType) => {
+      setSortType(value);
+   }, []);
+
    //const [page, setPage] = useState<number>(1);
    useEffect(() => {
       fetchMovies()
@@ -52,13 +61,16 @@ const MainPage = () => {
    }
    return (
       <div>
-         <div>
+         <div style={{ display: "flex", alignItems: "start" }}>
             <FilterGenreComponent
                names={genreNames}
                genres={genres}
                clickOnGenre={memoizedSetGenre}
             />
-            <SortComponent />
+            <SortComponent
+               sortType={sortType}
+               setSortType={memoizedSetSortType}
+            />
          </div>
          <MovieList movies={movies} />
       </div>

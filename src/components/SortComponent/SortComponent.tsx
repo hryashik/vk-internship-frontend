@@ -7,28 +7,45 @@ import {
    SelectChangeEvent,
 } from "@mui/material";
 import React from "react";
+import { SortEnumType } from "../../types/sortType";
 
-const SortComponent = () => {
-   const [age, setAge] = React.useState("");
+interface IProps {
+   sortType: SortEnumType;
+   setSortType: (value: SortEnumType) => void;
+}
+
+const SortComponent: React.FC<IProps> = ({ sortType, setSortType }) => {
+   /*    const [sortType, setSortType] = React.useState<SortEnumType>(
+      SortEnumType.RatingDesc
+   ); */
 
    const handleChange = (event: SelectChangeEvent) => {
-      setAge(event.target.value as string);
+      setSortType(event.target.value as SortEnumType);
    };
 
    return (
-      <Box sx={{ minWidth: 120 }}>
-         <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <Box sx={{ minWidth: 200, m: 1 }}>
+         <FormControl fullWidth variant="standard">
+            <InputLabel id="demo-simple-select-label">Сортировка</InputLabel>
             <Select
                labelId="demo-simple-select-label"
                id="demo-simple-select"
-               value={age}
+               value={sortType}
                label="Age"
                onChange={handleChange}
             >
-               <MenuItem value={10}>Ten</MenuItem>
-               <MenuItem value={20}>Twenty</MenuItem>
-               <MenuItem value={30}>Thirty</MenuItem>
+               <MenuItem value={SortEnumType.RatingDesc}>
+                  {SortEnumType.RatingDesc}
+               </MenuItem>
+               <MenuItem value={SortEnumType.RatingAsc}>
+                  {SortEnumType.RatingAsc}
+               </MenuItem>
+               <MenuItem value={SortEnumType.AlphabetAsc}>
+                  {SortEnumType.AlphabetAsc}
+               </MenuItem>
+               <MenuItem value={SortEnumType.AlphabetDesc}>
+                  {SortEnumType.AlphabetDesc}
+               </MenuItem>
             </Select>
          </FormControl>
       </Box>
