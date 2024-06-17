@@ -16,8 +16,6 @@
    box-shadow: 1px 1px 10px rgba(112, 112, 112, 0.744);
 }
 
-.card__content {}
-
 .rating {
    position: absolute;
    bottom: 65px;
