@@ -8,6 +8,7 @@ import { SortEnumType } from "../types/sortType";
 import YearSlider from "../components/YearSlider/YearSlider";
 import MovieListSkeleton from "../components/MovieItemSkeleton";
 import PaginationComponent from "../components/ui/PaginationComponent";
+import SearchComponent from "../components/SearchComponent/SearchComponent";
 
 const genreNames = [
    "Комедия",
@@ -60,7 +61,7 @@ const MainPage = () => {
       /* fetchMoviesMock()
          .then((value) => setMovies(value))
          .catch(() => setError(true));*/
-      apiClient
+      /* apiClient
          .fetchMovies({ genres, page, year: yearRange, sortType })
          .then((data) => {
             setMovies(data.docs);
@@ -70,7 +71,7 @@ const MainPage = () => {
             console.error(e);
             setError(true);
          })
-         .finally(() => setFetchingStatus(false));
+         .finally(() => setFetchingStatus(false)); */
    }, [genres, yearRange, sortType, page]);
 
    if (error) {
@@ -89,6 +90,7 @@ const MainPage = () => {
             alignItems: "center",
          }}
       >
+         <SearchComponent />
          <div
             style={{
                width: "100%",
@@ -102,11 +104,11 @@ const MainPage = () => {
                genres={genres}
                clickOnGenre={memoizedSetGenre}
             />
+            <YearSlider value={yearRange} setValue={memoizedSetYearRange} />
             <SortComponent
                sortType={sortType}
                setSortType={memoizedSetSortType}
             />
-            <YearSlider value={yearRange} setValue={memoizedSetYearRange} />
          </div>
          {fetchingStatus ? (
             <MovieListSkeleton />

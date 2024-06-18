@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { MovieType } from "../types/movieType";
 import { ApiResponseType } from "../types/responseType";
 import { SortEnumType } from "../types/sortType";
 
@@ -8,6 +7,7 @@ export type RequestData = {
    year: number[];
    page: number;
    sortType: SortEnumType;
+   limit?: number;
 };
 
 class ApiClient {
@@ -22,7 +22,7 @@ class ApiClient {
    }
    private parseDataToQuery(data: RequestData) {
       const params = new URLSearchParams();
-      params.append("limit", "50");
+      params.append("limit", data.limit ? data.limit.toString() : "50");
       params.append("notNullFields", "name");
       params.append("notNullFields", "rating.kp");
       params.append("notNullFields", "poster.url");
@@ -77,26 +77,14 @@ class ApiClient {
       );
       return res.data;
    }
+
+   public async searchMovies(name: string) {
+      const res = await this.instance.get<ApiResponseType>(
+         `/movie/search?query=${name}&limit=20`
+      );
+      return res.data;
+   }
 }
-
-/* export const fetchMoviesMock = async () => {
-   return new Promise<MovieType[]>((resolve) => {
-      setTimeout(() => resolve(movies), 500);
-   });
-}; */
-
-/* export const fetchMovies = async () => {
-   const apiKey = import.meta.env.VITE_API_KEY;
-   const res = await axios.get<ApiResponseType>(
-      "https://api.kinopoisk.dev/v1.4/movie?page=1&limit=50&year=1990-2024&notNullFields=name&notNullFields=rating.kp&notNullFields=poster.url&type=movie&rating.kp=1-10",
-      {
-         headers: {
-            "X-API-KEY": apiKey,
-         },
-      }
-   );
-   return res.data;
-}; */
 
 const apiClient = new ApiClient(import.meta.env.VITE_API_KEY);
 export default apiClient;
