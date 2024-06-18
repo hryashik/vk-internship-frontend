@@ -7,18 +7,22 @@ import styles from "./MovieItem.module.css";
 
 import { MovieType } from "../types/movieType";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IProps extends MovieType {}
 
 const MovieItem: React.FC<IProps> = React.memo((movie) => {
+   const navigate = useNavigate();
    const calcColor = (rating: number) => {
       if (rating <= 5) return "red";
       else if (rating > 5 && rating < 7.5) return "yellow";
       else return "white";
    };
+   const handleClick = () => navigate(`/movie/${movie.id}`);
+
    return (
       <Card className={styles.card}>
-         <CardActionArea>
+         <CardActionArea onClick={handleClick}>
             <CardMedia
                component="img"
                image={movie.poster.previewUrl}

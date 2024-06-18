@@ -3,8 +3,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { MovieType } from "../../types/movieType";
 import { useEffect, useMemo, useState } from "react";
 import apiClient from "../../api/movieApi";
+import { useNavigate } from "react-router-dom";
 
 const SearchComponent = () => {
+   const navigate = useNavigate();
    const [findMovies, setFindMovies] = useState<MovieType[]>([]);
    const [error, setError] = useState<boolean>(false);
    const [input, setInput] = useState("");
@@ -34,6 +36,14 @@ const SearchComponent = () => {
       }
       return Array.from(unique);
    }, [findMovies]);
+
+   const handleClickOnOption = (_: React.SyntheticEvent, value: unknown) => {
+      const name = value as string;
+      const film = findMovies.find((el) => el.name === name)!;
+
+      navigate(`/movie/${film.id}`);
+   };
+
    if (error) {
       <>
          <TextField
@@ -48,6 +58,7 @@ const SearchComponent = () => {
          sx={{ width: 400, mt: 2 }}
          id="free-solo-demo"
          options={displayedMovies}
+         onChange={handleClickOnOption}
          renderInput={(params) => (
             <TextField
                {...params}

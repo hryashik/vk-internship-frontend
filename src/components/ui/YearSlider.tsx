@@ -13,8 +13,6 @@ function valuetext(value: number) {
 }
 
 const YearSlider: React.FC<IProps> = ({ value, setValue }) => {
-   //const [value, setValue] = React.useState<number[]>([1990, 2024]);
-
    const handleChange = (_: Event, newValue: number | number[]) => {
       setValue(newValue as number[]);
    };

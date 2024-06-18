@@ -35,6 +35,7 @@
    height: 480px;
    display: flex;
    flex-direction: column;
+   align-items: center;
    margin-right: 20px;
    margin-bottom: 20px;
 }
@@ -71,7 +72,6 @@
 }
 
 .inner__rating {
-   margin-left: 20px;
    margin-bottom: 50px;
    display: flex;
    flex-direction: column;
@@ -81,7 +81,7 @@
 .rating__number {
    font-weight: 500;
    font-size: 25px;
-   color: gold
+   color: rgb(255, 196, 0)
 }
 
 .rating__votes {

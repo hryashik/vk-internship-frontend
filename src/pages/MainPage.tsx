@@ -58,10 +58,7 @@ const MainPage = () => {
 
    useEffect(() => {
       setFetchingStatus(true);
-      /* fetchMoviesMock()
-         .then((value) => setMovies(value))
-         .catch(() => setError(true));*/
-      /* apiClient
+      apiClient
          .fetchMovies({ genres, page, year: yearRange, sortType })
          .then((data) => {
             setMovies(data.docs);
@@ -71,7 +68,7 @@ const MainPage = () => {
             console.error(e);
             setError(true);
          })
-         .finally(() => setFetchingStatus(false)); */
+         .finally(() => setFetchingStatus(false));
    }, [genres, yearRange, sortType, page]);
 
    if (error) {
