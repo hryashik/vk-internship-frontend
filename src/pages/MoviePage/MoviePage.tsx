@@ -7,74 +7,6 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StarRating from "../../components/ui/StarRating";
 import apiClient from "../../api/movieApi";
 
-const movie: MovieType = {
-   id: 326,
-   name: "Побег из Шоушенка",
-   alternativeName: "The Shawshank Redemption",
-   enName: "",
-   type: "movie",
-   year: 1994,
-   description:
-      "Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.",
-   shortDescription:
-      "Несправедливо осужденный банкир готовит побег из тюрьмы. Тим Роббинс в выдающейся экранизации Стивена Кинга",
-   movieLength: 142,
-   isSeries: false,
-   ticketsOnSale: false,
-   totalSeriesLength: null,
-   seriesLength: null,
-   ratingMpaa: "r",
-   ageRating: 18,
-   top10: null,
-   top250: 4,
-   typeNumber: 1,
-   status: null,
-   names: [],
-   externalId: {
-      imdb: "tt0111161",
-      tmdb: 278,
-      kpHD: "49bf154f0dea2d53b169846a284469cd",
-   },
-   logo: {
-      url: "https://avatars.mds.yandex.net/get-ott/1648503/2a000001705c8bf514c033f1019473a4caae/orig",
-   },
-   poster: {
-      url: "https://image.openmoviedb.com/kinopoisk-images/1599028/0b76b2a2-d1c7-4f04-a284-80ff7bb709a4/orig",
-      previewUrl:
-         "https://image.openmoviedb.com/kinopoisk-images/1599028/0b76b2a2-d1c7-4f04-a284-80ff7bb709a4/x1000",
-   },
-   backdrop: {
-      url: "https://image.openmoviedb.com/kinopoisk-ott-images/1672343/2a0000016b03d1f5365474a90d26998e2a9f/orig",
-      previewUrl:
-         "https://image.openmoviedb.com/kinopoisk-ott-images/1672343/2a0000016b03d1f5365474a90d26998e2a9f/x1000",
-   },
-   rating: {
-      kp: 9.109,
-      imdb: 9.3,
-      filmCritics: 8.2,
-      russianFilmCritics: 0,
-      await: null,
-   },
-   votes: {
-      kp: 1025954,
-      imdb: 2901429,
-      filmCritics: 141,
-      russianFilmCritics: 1,
-      await: 2,
-   },
-   genres: [
-      {
-         name: "драма",
-      },
-   ],
-   countries: [
-      {
-         name: "США",
-      },
-   ],
-   releaseYears: [],
-};
-
 const MoviePage = () => {
    const { movieId } = useParams();
    const navigate = useNavigate();
@@ -104,8 +36,9 @@ const MoviePage = () => {
       if (!movieId || !Number(movieId)) {
          navigate("/404");
       } else {
-         apiClient.searchMovieById(+movieId).then();
-         setMovieInfo(movie);
+         apiClient.searchMovieById(+movieId).then((data) => {
+            setMovieInfo(data);
+         });
       }
    }, [movieId, navigate]);
    if (!movieInfo) {
@@ -120,6 +53,15 @@ const MoviePage = () => {
          <div className={styles.container__inner}>
             <div className={styles.inner__poster}>
                <img src={movieInfo.poster.url} alt="img..." />
+               <div className={styles.inner__rating}>
+                  <p className={styles.rating__number}>
+                     {movieInfo.rating.kp.toFixed(1)}
+                  </p>
+                  <StarRating value={movieInfo.rating.kp} />
+                  <p className={styles.rating__votes}>
+                     {movieInfo.votes.kp.toLocaleString("ru-RU")} оценок
+                  </p>
+               </div>
             </div>
             <div className={styles.inner__info}>
                <Typography variant="h4" fontWeight={700}>
@@ -166,21 +108,12 @@ const MoviePage = () => {
                   variant="h5"
                   fontWeight={600}
                   fontSize={18}
-                  mb={2}
+                  mb={1}
                   mt={2}
                >
                   Описание:
                </Typography>
                <Typography>{movieInfo.description}</Typography>
-            </div>
-            <div className={styles.inner__rating}>
-               <p className={styles.rating__number}>
-                  {movieInfo.rating.kp.toFixed(1)}
-               </p>
-               <StarRating value={movieInfo.rating.kp} />
-               <p className={styles.rating__votes}>
-                  {movieInfo.votes.kp.toLocaleString("ru-RU")} оценок
-               </p>
             </div>
          </div>
       </div>

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { ApiResponseType } from "../types/responseType";
 import { SortEnumType } from "../types/sortType";
+import { MovieType } from "../types/movieType";
 
 export type RequestData = {
    genres: string[];
@@ -86,7 +87,7 @@ class ApiClient {
    }
 
    public async searchMovieById(id: number) {
-      const res = await this.instance.get<ApiResponseType>(`/movie/${id}`);
+      const res = await this.instance.get<MovieType>(`/movie/${id}`);
       return res.data;
    }
 }
