@@ -1,10 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { MovieType } from "../../types/movieType";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./MoviePage.module.css";
 import { Button, Typography } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StarRating from "../../components/ui/StarRating";
+import apiClient from "../../api/movieApi";
 
 const movie: MovieType = {
    id: 326,
@@ -76,6 +77,7 @@ const movie: MovieType = {
 
 const MoviePage = () => {
    const { movieId } = useParams();
+   const navigate = useNavigate();
    const [movieInfo, setMovieInfo] = useState<MovieType | undefined>(undefined);
 
    const formatGenres = useMemo(() => {
@@ -99,8 +101,13 @@ const MoviePage = () => {
    }, [movieInfo]);
 
    useEffect(() => {
-      setMovieInfo(movie);
-   }, []);
+      if (!movieId || !Number(movieId)) {
+         navigate("/404");
+      } else {
+         apiClient.searchMovieById(+movieId).then();
+         setMovieInfo(movie);
+      }
+   }, [movieId, navigate]);
    if (!movieInfo) {
       return (
          <div>
