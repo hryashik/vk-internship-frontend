@@ -23,11 +23,11 @@ const MoviePage = () => {
    const formatTime = useMemo(() => {
       let str = "";
       if (movieInfo) {
-         const hours = Math.round(movieInfo.movieLength / 60);
+         const hours = Math.floor(movieInfo.movieLength / 60);
          const minutes = movieInfo.movieLength - hours * 60;
          str += hours;
          str += ":";
-         str += minutes;
+         str += minutes.toString().length > 1 ? minutes : "0" + minutes;
       }
       return str;
    }, [movieInfo]);

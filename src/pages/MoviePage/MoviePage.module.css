@@ -6,6 +6,23 @@
    box-shadow: 0 0 10px grey;
 }
 
+@media (max-width: 1800px) {
+   .container {
+      width: 80%;
+   }
+
+   .inner__info {
+      width: 350px;
+   }
+
+}
+
+@media (max-width: 1400px) {
+   .container {
+      width: 95%;
+   }
+}
+
 .container__inner {
    margin: 0 auto;
    display: flex;
@@ -35,11 +52,16 @@
    align-items: start;
 }
 
-.about {}
+.about {
+   width: 300px;
+}
+
+.about p {
+   width: inherit;
+}
 
 .about__line {
    display: flex;
-   justify-content: space-between;
    margin-bottom: 10px;
 }
 
