@@ -10,9 +10,10 @@ const SearchComponent = () => {
    const [input, setInput] = useState("");
 
    useEffect(() => {
+      if (!input) return;
       const handler = setTimeout(() => {
          apiClient
-            .searchMovies(input)
+            .searchMoviesByName(input)
             .then((data) => setFindMovies(data.docs))
             .catch((e) => {
                console.error(e);
@@ -33,7 +34,15 @@ const SearchComponent = () => {
       }
       return Array.from(unique);
    }, [findMovies]);
-
+   if (error) {
+      <>
+         <TextField
+            label="Поиск фильма"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+         />
+      </>;
+   }
    return (
       <Autocomplete
          sx={{ width: 400, mt: 2 }}

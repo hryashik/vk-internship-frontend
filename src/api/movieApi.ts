@@ -78,10 +78,15 @@ class ApiClient {
       return res.data;
    }
 
-   public async searchMovies(name: string) {
+   public async searchMoviesByName(name: string) {
       const res = await this.instance.get<ApiResponseType>(
          `/movie/search?query=${name}&limit=20`
       );
+      return res.data;
+   }
+
+   public async searchMovieById(id: number) {
+      const res = await this.instance.get<ApiResponseType>(`/movie/${id}`);
       return res.data;
    }
 }

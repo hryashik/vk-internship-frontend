@@ -3,7 +3,7 @@ export type MovieType = {
    name: string | null;
    alternativeName: string | null;
    description: string;
-   countries: string[];
+   countries: { name: string }[];
    genres: { name: string }[];
    poster: {
       previewUrl: string;
@@ -11,4 +11,6 @@ export type MovieType = {
    };
    year: number;
    rating: { kp: number; imdb: number; filmCritics: number };
+   votes: { kp: number };
+   movieLength: number;
 };

@@ -9,6 +9,7 @@ interface IProps {
 const StarRating: React.FC<IProps> = ({ value }) => {
    return (
       <Rating
+         size="small"
          onMouseEnter={undefined}
          max={10}
          name="customized-icons"

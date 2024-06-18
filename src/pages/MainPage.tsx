@@ -5,7 +5,7 @@ import MovieList from "../components/MovieList";
 import FilterGenreComponent from "../components/FilterComponent/FilterComponent";
 import SortComponent from "../components/SortComponent/SortComponent";
 import { SortEnumType } from "../types/sortType";
-import YearSlider from "../components/YearSlider/YearSlider";
+import YearSlider from "../components/ui/YearSlider";
 import MovieListSkeleton from "../components/MovieItemSkeleton";
 import PaginationComponent from "../components/ui/PaginationComponent";
 import SearchComponent from "../components/SearchComponent/SearchComponent";
@@ -88,6 +88,11 @@ const MainPage = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "85%",
+            background: "white",
+            margin: "0 auto",
+            padding: "0 30px",
+            borderRadius: "10px",
          }}
       >
          <SearchComponent />
@@ -96,7 +101,8 @@ const MainPage = () => {
                width: "100%",
                display: "flex",
                alignItems: "center",
-               justifyContent: "space-between",
+               justifyContent: "space-around",
+               flexWrap: "wrap",
             }}
          >
             <FilterGenreComponent
