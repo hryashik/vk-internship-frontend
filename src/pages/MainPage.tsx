@@ -37,6 +37,7 @@ const MainPage = () => {
       "Криминал",
    ]);
    const [page, setPage] = useState<number>(1);
+   const [totalPages, setTotalPages] = useState<number>(1);
 
    const memoizedSetGenre = useCallback((value: string[]) => {
       setGenre([...value]);
@@ -63,6 +64,7 @@ const MainPage = () => {
          .fetchMovies({ genres, page, year: yearRange, sortType })
          .then((data) => {
             setMovies(data.docs);
+            setTotalPages(data.pages);
          })
          .catch((e) => {
             console.error(e);
@@ -112,7 +114,7 @@ const MainPage = () => {
             <MovieList movies={movies} />
          )}
          <PaginationComponent
-            total={20}
+            total={totalPages}
             currentPage={page}
             setCurrentPage={memoizedSetPage}
          />
