@@ -7,6 +7,7 @@ import SortComponent from "../components/SortComponent/SortComponent";
 import { SortEnumType } from "../types/sortType";
 import YearSlider from "../components/YearSlider/YearSlider";
 import MovieListSkeleton from "../components/MovieItemSkeleton";
+import PaginationComponent from "../components/ui/PaginationComponent";
 
 const genreNames = [
    "Комедия",
@@ -35,6 +36,7 @@ const MainPage = () => {
       "Детектив",
       "Криминал",
    ]);
+   const [page, setPage] = useState<number>(1);
 
    const memoizedSetGenre = useCallback((value: string[]) => {
       setGenre([...value]);
@@ -48,14 +50,17 @@ const MainPage = () => {
       setYearRange(value);
    }, []);
 
-   //const [page, setPage] = useState<number>(1);
+   const memoizedSetPage = useCallback((value: number) => {
+      setPage(value);
+   }, []);
+
    useEffect(() => {
       setFetchingStatus(true);
       /* fetchMoviesMock()
          .then((value) => setMovies(value))
          .catch(() => setError(true));*/
       apiClient
-         .fetchMovies({ genres, page: 1, year: yearRange, sortType })
+         .fetchMovies({ genres, page, year: yearRange, sortType })
          .then((data) => {
             setMovies(data.docs);
          })
@@ -64,7 +69,7 @@ const MainPage = () => {
             setError(true);
          })
          .finally(() => setFetchingStatus(false));
-   }, [genres, yearRange, sortType]);
+   }, [genres, yearRange, sortType, page]);
 
    if (error) {
       return (
@@ -75,9 +80,16 @@ const MainPage = () => {
    }
 
    return (
-      <div>
+      <div
+         style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+         }}
+      >
          <div
             style={{
+               width: "100%",
                display: "flex",
                alignItems: "center",
                justifyContent: "space-between",
@@ -99,6 +111,11 @@ const MainPage = () => {
          ) : (
             <MovieList movies={movies} />
          )}
+         <PaginationComponent
+            total={20}
+            currentPage={page}
+            setCurrentPage={memoizedSetPage}
+         />
       </div>
    );
 };
