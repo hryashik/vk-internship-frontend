@@ -6,11 +6,13 @@ import { Button, Typography } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StarRating from "../../components/ui/StarRating";
 import apiClient from "../../api/movieApi";
+import MoviePageSkeleton from "../../components/MoviePageSkeleton";
 
 const MoviePage = () => {
    const { movieId } = useParams();
    const navigate = useNavigate();
    const [movieInfo, setMovieInfo] = useState<MovieType | undefined>(undefined);
+   const [isFetching, setIsFetching] = useState<boolean>(false);
 
    const formatGenres = useMemo(() => {
       let str = "";
@@ -36,15 +38,28 @@ const MoviePage = () => {
       if (!movieId || !Number(movieId)) {
          navigate("/404");
       } else {
-         apiClient.searchMovieById(+movieId).then((data) => {
-            setMovieInfo(data);
-         });
+         setIsFetching(true);
+         apiClient
+            .searchMovieById(+movieId)
+            .then((data) => {
+               setMovieInfo(data);
+            })
+            .finally(() => setIsFetching(false));
       }
    }, [movieId, navigate]);
+   if (isFetching) {
+      return (
+         <div className={styles.container}>
+            <div className={styles.container__inner}>
+               <MoviePageSkeleton />
+            </div>
+         </div>
+      );
+   }
    if (!movieInfo) {
       return (
-         <div>
-            <h1>Ошибка</h1>
+         <div className={styles.container}>
+            <h1>Нет информации о фильме</h1>
          </div>
       );
    }
