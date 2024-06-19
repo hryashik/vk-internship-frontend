@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
 import styles from "./MovieItem.module.css";
 
-import { MovieType } from "../types/movieType";
+import { MovieType } from "../../types/movieType";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

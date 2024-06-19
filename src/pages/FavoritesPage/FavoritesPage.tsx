@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MovieList from "../../components/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 import { MovieType } from "../../types/movieType";
 import apiClient from "../../api/movieApi";
 import { SortEnumType } from "../../types/sortType";

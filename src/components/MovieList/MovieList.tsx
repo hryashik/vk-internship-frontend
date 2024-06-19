@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import { MovieType } from "../types/movieType";
-import MovieItem from "./MovieItem";
+import { MovieType } from "../../types/movieType";
+import MovieItem from "../MovieItem/MovieItem";
 import styles from "./MovieList.module.css";
 
 interface IProps {

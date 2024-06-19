@@ -7,7 +7,7 @@ import FilterGenreComponent from "../../components/FilterComponent/FilterCompone
 import YearSlider from "../../components/ui/YearSlider";
 import SortComponent from "../../components/SortComponent/SortComponent";
 import MovieListSkeleton from "../../components/MovieItemSkeleton";
-import MovieList from "../../components/MovieList";
+import MovieList from "../../components/MovieList/MovieList";
 import PaginationComponent from "../../components/ui/PaginationComponent";
 
 const genreNames = [
