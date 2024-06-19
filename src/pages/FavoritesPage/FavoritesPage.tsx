@@ -12,6 +12,7 @@ const FavoritesPage = () => {
    const [error, setError] = useState<boolean>(false);
    const [fetching, setIsFetching] = useState<boolean>(false);
    const [page, setPage] = useState<number>(1);
+
    useEffect(() => {
       const ids = getMoviesFromLocalStorage();
       if (ids.length) {
@@ -35,6 +36,7 @@ const FavoritesPage = () => {
             .finally(() => setIsFetching(false));
       }
    }, [page]);
+
    if (error) {
       return (
          <div className={styles.container}>
@@ -47,6 +49,7 @@ const FavoritesPage = () => {
          </div>
       );
    }
+
    return (
       <div className={styles.container}>
          <div className={styles.container__inner}>

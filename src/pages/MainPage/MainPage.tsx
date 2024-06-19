@@ -25,7 +25,7 @@ const MainPage = () => {
    const [movies, setMovies] = useState<MovieType[]>([]);
    const [error, setError] = useState<boolean>(false);
    const [sortType, setSortType] = useState<SortEnumType>(
-      SortEnumType.RatingDesc
+      SortEnumType.RatingDesc,
    );
    const [yearRange, setYearRange] = useState<number[]>([1990, 2024]);
    const [genres, setGenre] = useState<string[]>([

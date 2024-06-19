@@ -5,6 +5,6 @@ export function deleteMovieFromLocalStorage(id: number) {
    const arr = getMoviesFromLocalStorage();
    localStorage.setItem(
       fieldName,
-      JSON.stringify(arr.filter((el) => el != id))
+      JSON.stringify(arr.filter((el) => el != id)),
    );
 }

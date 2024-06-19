@@ -2,7 +2,7 @@
    position: relative;
    max-width: 345px;
    width: 100%;
-   transition: .3s;
+   transition: 0.3s;
 }
 
 .card img {
@@ -11,7 +11,7 @@
 }
 
 .card:hover {
-   transition: .3s;
+   transition: 0.3s;
    transform: scale(1.06);
    box-shadow: 1px 1px 10px rgba(112, 112, 112, 0.744);
 }

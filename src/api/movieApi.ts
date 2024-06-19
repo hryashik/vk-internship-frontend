@@ -55,7 +55,7 @@ class ApiClient {
          params.append("sortField", "name");
          params.append(
             "sortType",
-            data.sortType === SortEnumType.AlphabetAsc ? "1" : "-1"
+            data.sortType === SortEnumType.AlphabetAsc ? "1" : "-1",
          );
       } else if (
          data.sortType === SortEnumType.RatingAsc ||
@@ -64,7 +64,7 @@ class ApiClient {
          params.append("sortField", "rating.kp");
          params.append(
             "sortType",
-            data.sortType === SortEnumType.RatingAsc ? "1" : "-1"
+            data.sortType === SortEnumType.RatingAsc ? "1" : "-1",
          );
       }
 
@@ -79,14 +79,14 @@ class ApiClient {
       const queryParams = this.parseDataToQuery(data);
 
       const res = await this.instance.get<ApiResponseType>(
-         `/movie?${queryParams}`
+         `/movie?${queryParams}`,
       );
       return res.data;
    }
 
    public async searchMoviesByName(name: string) {
       const res = await this.instance.get<ApiResponseType>(
-         `/movie/search?query=${name}&limit=20`
+         `/movie/search?query=${name}&limit=20`,
       );
       return res.data;
    }
