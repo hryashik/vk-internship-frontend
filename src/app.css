@@ -10,11 +10,11 @@ body {
    font-family: "Roboto";
 }
 
-/* .app-container {
-   width: 90%;
-   padding: 10px;
+.app-container {
+   width: 80%;
    margin: 0 auto;
    background-color: white;
-   border-radius: 5px;
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
    box-shadow: 1px 1px 10px rgb(216, 216, 216);
-} */
+}

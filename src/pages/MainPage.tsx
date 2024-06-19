@@ -85,20 +85,20 @@ const MainPage = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: "85%",
             background: "white",
             margin: "0 auto",
             padding: "0 30px",
-            borderRadius: "10px",
          }}
       >
-         <SearchComponent />
+         <div style={{ alignSelf: "end" }}>
+            <SearchComponent />
+         </div>
          <div
             style={{
                width: "100%",
                display: "flex",
                alignItems: "center",
-               justifyContent: "space-around",
+               justifyContent: "space-between",
                flexWrap: "wrap",
             }}
          >

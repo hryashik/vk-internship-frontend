@@ -64,7 +64,7 @@ const MoviePage = () => {
       );
    }
    return (
-      <div className={styles.container}>
+      <div>
          <div className={styles.container__inner}>
             <div className={styles.inner__poster}>
                <img src={movieInfo.poster.url} alt="img..." />
