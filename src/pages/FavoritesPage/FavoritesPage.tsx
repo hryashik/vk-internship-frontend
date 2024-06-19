@@ -9,6 +9,7 @@ import { getMoviesFromLocalStorage } from "../../utilities/getMoviesFromLocalSto
 
 const FavoritesPage = () => {
    const [movies, setMovies] = useState<MovieType[]>([]);
+   const [error, setError] = useState<boolean>(false);
    const [fetching, setIsFetching] = useState<boolean>(false);
    const [page, setPage] = useState<number>(1);
    useEffect(() => {
@@ -27,12 +28,31 @@ const FavoritesPage = () => {
                setMovies(data.docs);
                setPage(data.page);
             })
+            .catch((e) => {
+               console.error(e);
+               setError(true);
+            })
             .finally(() => setIsFetching(false));
       }
    }, [page]);
+   if (error) {
+      return (
+         <div className={styles.container}>
+            <div className={styles.container__inner}>
+               <h3>
+                  Произошла ошибка, вероятно, что закончились запросы на
+                  токене...
+               </h3>
+            </div>
+         </div>
+      );
+   }
    return (
       <div className={styles.container}>
          <div className={styles.container__inner}>
+            <div className={styles.title}>
+               <h3>Избранное</h3>
+            </div>
             {!fetching ? <MovieList movies={movies} /> : <MovieListSkeleton />}
          </div>
       </div>

@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { MovieType } from "../types/movieType";
-import apiClient from "../api/movieApi";
-import MovieList from "../components/MovieList";
-import FilterGenreComponent from "../components/FilterComponent/FilterComponent";
-import SortComponent from "../components/SortComponent/SortComponent";
-import { SortEnumType } from "../types/sortType";
-import YearSlider from "../components/ui/YearSlider";
-import MovieListSkeleton from "../components/MovieItemSkeleton";
-import PaginationComponent from "../components/ui/PaginationComponent";
-import SearchComponent from "../components/SearchComponent/SearchComponent";
+import { MovieType } from "../../types/movieType";
+import { SortEnumType } from "../../types/sortType";
+import apiClient from "../../api/movieApi";
+import SearchComponent from "../../components/SearchComponent/SearchComponent";
+import FilterGenreComponent from "../../components/FilterComponent/FilterComponent";
+import YearSlider from "../../components/ui/YearSlider";
+import SortComponent from "../../components/SortComponent/SortComponent";
+import MovieListSkeleton from "../../components/MovieItemSkeleton";
+import MovieList from "../../components/MovieList";
+import PaginationComponent from "../../components/ui/PaginationComponent";
 
 const genreNames = [
    "Комедия",
@@ -74,7 +74,9 @@ const MainPage = () => {
    if (error) {
       return (
          <>
-            <h1>Произошла ошибка...</h1>
+            <h1>
+               Произошла ошибка, вероятно, что закончились запросы на токене
+            </h1>
          </>
       );
    }

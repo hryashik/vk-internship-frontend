@@ -25,6 +25,8 @@
 
 .container__inner {
    margin: 0 auto;
+   width: 100%;
+   min-height: 400px;
    display: flex;
    justify-content: space-evenly;
    flex-wrap: wrap;

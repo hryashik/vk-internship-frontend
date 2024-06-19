@@ -6,7 +6,6 @@ import { Button, Typography } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StarRating from "../../components/ui/StarRating";
 import apiClient from "../../api/movieApi";
-import MoviePageSkeleton from "../../components/MoviePageSkeleton";
 import { saveMovieInLocalStorage } from "../../utilities/saveMovieInLocalStorage";
 import { deleteMovieFromLocalStorage } from "../../utilities/deleteMovieFromLocalStorage";
 import { getMoviesFromLocalStorage } from "../../utilities/getMoviesFromLocalStorage";
@@ -15,7 +14,8 @@ const MoviePage = () => {
    const { movieId } = useParams();
    const navigate = useNavigate();
    const [movieInfo, setMovieInfo] = useState<MovieType | undefined>(undefined);
-   const [isFavorite, setIsFavorite] = useState(false);
+   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+   const [error, setError] = useState<boolean>();
    const [isFetching, setIsFetching] = useState<boolean>(false);
 
    const formatGenres = useMemo(() => {
@@ -51,13 +51,17 @@ const MoviePage = () => {
 
    useEffect(() => {
       if (!movieId || !Number(movieId)) {
-         navigate("/404");
+         return;
       } else {
          setIsFetching(true);
          apiClient
             .searchMovieById(+movieId)
             .then((data) => {
                setMovieInfo(data);
+            })
+            .catch((e) => {
+               console.error(e);
+               setError(true);
             })
             .finally(() => setIsFetching(false));
       }
@@ -70,10 +74,18 @@ const MoviePage = () => {
    }, [movieInfo]);
 
    if (isFetching) {
+      return <div className={styles.container}></div>;
+   }
+   if (error) {
       return (
          <div className={styles.container}>
             <div className={styles.container__inner}>
-               <MoviePageSkeleton />
+               {error && (
+                  <p>
+                     Произошла ошибка, вероятно, что закончились запросы на
+                     токене...
+                  </p>
+               )}
             </div>
          </div>
       );
@@ -81,7 +93,19 @@ const MoviePage = () => {
    if (!movieInfo) {
       return (
          <div className={styles.container}>
-            <h1>Нет информации о фильме</h1>
+            <div className={styles.container__inner}>
+               {!movieInfo && (
+                  <p>
+                     Нет информации о фильме или такого фильма не существует...
+                  </p>
+               )}
+               {error && (
+                  <p>
+                     Произошла ошибка, вероятно, что закончились запросы на
+                     токене...
+                  </p>
+               )}
+            </div>
          </div>
       );
    }

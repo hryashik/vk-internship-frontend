@@ -12,8 +12,6 @@ const MoviePageSkeleton = () => {
             }}
          >
             <Skeleton height={60} width={700} />
-            <Skeleton height={400} width={300} />
-            <Skeleton height={150} width={700} />
          </div>
       </>
    );

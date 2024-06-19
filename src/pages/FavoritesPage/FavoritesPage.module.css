@@ -3,3 +3,9 @@
 .container__inner {
    min-height: 500px;
 }
+
+.title {
+   width: 300px;
+   text-align: center;
+   margin: 10px auto;
+}
