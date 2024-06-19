@@ -1,7 +1,7 @@
 ### О проекте
 
 В разработке использовал MaterialUI, Axios, React-router  
-Страницы "/", "/movie/:id", "/favorites", "/404"
+Страницы "/", "/movie/:id", "/favorites", "/404"  
 Сохраняю состояние избранных фильмов в local storage
 Токен лежит в .env
 
