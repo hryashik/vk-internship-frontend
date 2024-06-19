@@ -8,11 +8,13 @@ interface IProps {
 }
 
 const MovieList: React.FC<IProps> = ({ movies }) => {
-   if (!movies.length) {
+   if (movies.length === 0) {
       return (
-         <>
-            <h1>Loading...</h1>
-         </>
+         <div className={styles.container}>
+            <div className={styles.container__inner}>
+               <p>Список фильмов пуст!</p>
+            </div>
+         </div>
       );
    }
    return (

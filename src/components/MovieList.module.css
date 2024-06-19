@@ -1,3 +1,10 @@
 .container {
+   height: inherit;
    padding: 10px;
+}
+
+.container__inner {
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

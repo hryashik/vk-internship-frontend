@@ -9,6 +9,7 @@ export type RequestData = {
    page: number;
    sortType: SortEnumType;
    limit?: number;
+   id?: number[];
 };
 
 class ApiClient {
@@ -66,6 +67,10 @@ class ApiClient {
             data.sortType === SortEnumType.RatingAsc ? "1" : "-1"
          );
       }
+
+      data.id?.forEach((id) => {
+         params.append("id", id.toString());
+      });
 
       return decodeURI(params.toString());
    }

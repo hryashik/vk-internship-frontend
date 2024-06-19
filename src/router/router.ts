@@ -3,6 +3,7 @@ import MainPage from "../pages/MainPage";
 import MoviePage from "../pages/MoviePage/MoviePage";
 import NotFoundPage from "../pages/NoutFoundPage";
 import ApplicationBar from "../components/AppBar/ApplicationBar";
+import FavoritesPage from "../pages/FavoritesPage/FavoritesPage";
 
 const router = createBrowserRouter([
    {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
             Component: MainPage,
          },
          { path: "/movie/:movieId", Component: MoviePage },
+         { path: "/favorites", Component: FavoritesPage },
          { path: "/404", Component: NotFoundPage },
          { path: "*", Component: NotFoundPage },
       ],

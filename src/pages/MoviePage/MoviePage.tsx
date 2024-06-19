@@ -7,11 +7,15 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StarRating from "../../components/ui/StarRating";
 import apiClient from "../../api/movieApi";
 import MoviePageSkeleton from "../../components/MoviePageSkeleton";
+import { saveMovieInLocalStorage } from "../../utilities/saveMovieInLocalStorage";
+import { deleteMovieFromLocalStorage } from "../../utilities/deleteMovieFromLocalStorage";
+import { getMoviesFromLocalStorage } from "../../utilities/getMoviesFromLocalStorage";
 
 const MoviePage = () => {
    const { movieId } = useParams();
    const navigate = useNavigate();
    const [movieInfo, setMovieInfo] = useState<MovieType | undefined>(undefined);
+   const [isFavorite, setIsFavorite] = useState(false);
    const [isFetching, setIsFetching] = useState<boolean>(false);
 
    const formatGenres = useMemo(() => {
@@ -34,6 +38,17 @@ const MoviePage = () => {
       return str;
    }, [movieInfo]);
 
+   const handleClick = () => {
+      if (!movieInfo) return;
+      if (isFavorite) {
+         deleteMovieFromLocalStorage(movieInfo.id);
+         setIsFavorite(false);
+      } else {
+         saveMovieInLocalStorage(movieInfo.id);
+         setIsFavorite(true);
+      }
+   };
+
    useEffect(() => {
       if (!movieId || !Number(movieId)) {
          navigate("/404");
@@ -47,6 +62,13 @@ const MoviePage = () => {
             .finally(() => setIsFetching(false));
       }
    }, [movieId, navigate]);
+
+   useEffect(() => {
+      if (movieInfo) {
+         setIsFavorite(getMoviesFromLocalStorage().includes(movieInfo.id));
+      }
+   }, [movieInfo]);
+
    if (isFetching) {
       return (
          <div className={styles.container}>
@@ -86,11 +108,12 @@ const MoviePage = () => {
                   {movieInfo.alternativeName || ""}
                </Typography>
                <Button
+                  onClick={handleClick}
                   sx={{ mt: 2, mb: 2 }}
                   variant="outlined"
-                  endIcon={<AddOutlinedIcon />}
+                  endIcon={!isFavorite && <AddOutlinedIcon />}
                >
-                  В избранное
+                  {isFavorite ? "Убрать из избранного" : "В избранное"}
                </Button>
                <Typography variant="h5" fontWeight={600} fontSize={18} mb={2}>
                   О фильме:
